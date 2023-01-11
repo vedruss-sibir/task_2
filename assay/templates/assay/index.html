@@ -1,0 +1,11 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<h1 class ="text-center mb-3">Тесты</h1>
+<h3 class ="text-center mb-3">Выбирете категорию</h3>
+
+{% for group_1 in group %}
+  <a href="{% url 'group' group_1.pk %}">
+    <p>{{ group_1.group_name }}</p>
+  </a>   
+{% endfor %}
+{% endblock %}
