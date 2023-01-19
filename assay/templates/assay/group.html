@@ -1,7 +1,11 @@
 {% extends 'includes/base.html' %}
 {% block content %}
 <h1> {{ group }} </h1>
-<h3 class ="text-center mb-3">выберите тест</h3>
-
-
+{% for test_1 in test %} 
+<a href="{% url 'test' test_1.pk %}"> 
+<p>{{test_1}}</p> 
+</a>
+{% endfor %}  
 {% endblock %}
+
+
