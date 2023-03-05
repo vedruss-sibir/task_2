@@ -1,10 +1,21 @@
 from django import forms
-from .models import Choice
+from .models import Answer
 
 
-class ChoiceForm(forms.ModelForm):
+class AnswerForm(forms.ModelForm):
+    answer = forms.ModelChoiceField(
+        required=True,
+        empty_label=None,
+        widget=forms.CheckboxSelectMultiple,
+        queryset=None,
+    )
+
     class Meta:
-        # На основе какой модели создаётся класс формы
-        model = Choice
-        # Укажем, какие поля будут в форме
-        fields = ("question", "answer")
+        model = Answer
+        fields = ("answer",)
+
+    def __init__(self, *args, **kwargs):
+        question = kwargs.pop("question")
+        qs = Answer.objects.filter(question=question)
+        super(AnswerForm, self).__init__(*args, **kwargs)
+        self.fields["answer"].queryset = qs

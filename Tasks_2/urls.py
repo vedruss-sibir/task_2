@@ -23,5 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
     path("group/<int:group_id>/", views.group, name="group"),
-    path("test/<int:test_id>/", views.test, name="test"),
+    path("test/<int:test_id>/", views.choice, name="test"),
 ]

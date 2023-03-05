@@ -1,21 +1,21 @@
 from django.contrib import admin
 
-from .models import Group, Question, Choice, Test
+from .models import Group, Question, Test, Answer
 
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = ("group_name",)
 
 
-class ChoiceAdmin(admin.ModelAdmin):
+class AnswerAdmin(admin.ModelAdmin):
     list_display = ("test", "question", "answer", "truth")
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("test", "question_text")
+    list_display = ("question_text",)
 
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choice, ChoiceAdmin)
+admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test)

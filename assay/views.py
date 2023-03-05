@@ -1,9 +1,9 @@
-from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404, render, redirect
+from django import forms
 
-from .models import Group, Question, Choice, Test
+from .forms import AnswerForm
+from .models import Group, Question, Test, Answer
 
 
 def index(request):
@@ -19,5 +19,23 @@ def group(request, group_id):
     return render(request, "assay/group.html", context)
 
 
-def test(request, test_id):
+def choice(request, test_id):
     test = get_object_or_404(Test, id=test_id)
+    questions = Question.objects.all().filter(test=test)
+    votes_true = 0
+    votes_fals = 0
+    question = questions[0]
+    answers = Answer.objects.all().filter(question=question)
+    form = AnswerForm(question=question)
+    if request.method == "POST":
+        value = request.POST
+        answer = value.get("answer")
+        answerss = get_object_or_404(Answer, id=answer)
+        if answerss.truth == True:
+            votes_true = +1
+        else:
+            votes_fals = +1
+        print("votes_true", votes_true)
+        print("votes_fals", votes_fals)
+    context = {"test": test, "question": question, "answer": answers, "form": form}
+    return render(request, "assay/test.html", context)

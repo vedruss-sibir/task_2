@@ -1,7 +1,14 @@
-<h3 class ="text-center mb-3">выберите тест</h3>
-{% for test_1 in test %}
-    <p>{{ test_1.test_name }}</p>
-  </a>   
-{% endfor %}
+{% extends 'includes/base.html' %}
+{% block content %}
+<h3> {{ test }} </h3>
 
+<p> {{ question }} </p>
+<form method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить">
+  </form> 
+
+
+{% endblock %}
 

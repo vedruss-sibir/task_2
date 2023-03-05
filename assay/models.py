@@ -24,12 +24,14 @@ class Question(models.Model):
         return self.question_text
 
 
-class Choice(models.Model):
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+class Answer(models.Model):
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="answers"
+    )
     answer = models.CharField(max_length=400)
     truth = models.BooleanField()
     votes_true = models.IntegerField(default=0)
+    test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.answer
