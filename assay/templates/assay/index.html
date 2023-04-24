@@ -1,5 +1,9 @@
 {% extends 'includes/base.html' %}
 {% block content %}
+<h4 class ="text-center mb-3">Добро пожаловать {{ user }}</h4>
+<a href="{% url 'logout' %}">
+  <p>Сменить пользователя</p>
+</a>   
 <h1 class ="text-center mb-3">Тесты</h1>
 <h3 class ="text-center mb-3">Выбирете категорию</h3>
 

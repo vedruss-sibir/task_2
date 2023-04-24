@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
 
 from assay import views
 
@@ -24,4 +25,7 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("group/<int:group_id>/", views.group, name="group"),
     path("test/<int:test_id>/", views.choice, name="test"),
+    path("accounts/signup/", views.SignUp.as_view(), name="signup"),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("rezults/", views.rezults, name="rezult"),
 ]

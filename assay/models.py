@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class Group(models.Model):
@@ -32,6 +36,7 @@ class Answer(models.Model):
     truth = models.BooleanField()
     votes_true = models.IntegerField(default=0)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.answer

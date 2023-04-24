@@ -3,6 +3,11 @@ from django.contrib import admin
 from .models import Group, Question, Test, Answer
 
 
+class ChoiceInLine(admin.TabularInline):
+    model = Question
+    extra = 5
+
+
 class GroupAdmin(admin.ModelAdmin):
     list_display = ("group_name",)
 
