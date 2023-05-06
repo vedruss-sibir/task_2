@@ -1,8 +1,9 @@
 {% extends 'includes/base.html' %}
 {% block content %}
-<h3> {{ user }} </h3>
-<p> {{ rezult }} </p>
-
-
+<h3> Пользователь {{ user }} </h3>
+<p> Реультат {{ rezult }} % </p>
+<a href="{% url 'index' %}"> 
+    <p>Пройти еще один тест</p> 
+    </a>
 {% endblock %}
 

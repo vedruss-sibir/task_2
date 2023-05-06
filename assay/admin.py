@@ -3,24 +3,24 @@ from django.contrib import admin
 from .models import Group, Question, Test, Answer
 
 
-class ChoiceInLine(admin.TabularInline):
-    model = Question
-    extra = 5
+class ChoiceInline(admin.StackedInline):
+    model = Answer
+    extra = 3
 
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = ("group_name",)
 
 
-class AnswerAdmin(admin.ModelAdmin):
-    list_display = ("test", "question", "answer", "truth")
-
-
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("question_text",)
+    list_display = ("test", "question_text")
+    inlines = [ChoiceInline]
+
+
+##   list_display = ("test", "answer", "truth")
 
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Answer, AnswerAdmin)
+# admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test)

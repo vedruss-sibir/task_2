@@ -34,9 +34,7 @@ class Answer(models.Model):
     )
     answer = models.CharField(max_length=400)
     truth = models.BooleanField()
-    votes_true = models.IntegerField(default=0)
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # votes_true = models.IntegerField(default=0)
 
     def __str__(self):
         return self.answer

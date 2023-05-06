@@ -35,8 +35,7 @@ def group(request, group_id):
 def choice(request, test_id):
     test = get_object_or_404(Test, id=test_id)
     questions = Question.objects.all().filter(test=test)
-    global question_index
-    global votes_true
+    global question_index, votes_true
     print("question_index", question_index)
     question = questions[question_index]
     answers = Answer.objects.all().filter(question=question)
@@ -47,7 +46,7 @@ def choice(request, test_id):
         answerss = get_object_or_404(Answer, id=answer)
         question_index += 1
         if answerss.truth == True:
-            votes_true = +1
+            votes_true += 1
         if question_index < len(questions):
             print(question_index)
             print(len(questions))
@@ -56,20 +55,24 @@ def choice(request, test_id):
             form = AnswerForm(question=question)
         if question_index == len(questions):
             question_index = 0
-            print("Answer.votes_true", (Answer.votes_true))
+            print("Answer.votes_true", votes_true)
             if votes_true == 0:
                 rezult = 0
                 print(rezult)
+                request.session["rezult"] = rezult
                 return redirect("rezult")
             else:
                 rezult = round((votes_true / len(questions) * 100), 0)
+                request.session["rezult"] = rezult
                 print(rezult)
+                votes_true = 0
                 return redirect("rezult")
     context = {"test": test, "question": question, "answer": answers, "form": form}
     return render(request, "assay/test.html", context)
 
 
 def rezults(request):
+    rezult = request.session.get("rezult", None)
     user = request.user
-    context = {"user": user}
+    context = {"user": user, "rezult": rezult}
     return render(request, "assay/rezult.html", context)
