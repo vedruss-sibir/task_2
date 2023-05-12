@@ -15,7 +15,7 @@ Django 3.2.16
 - Клонируйте репозитарий
 
 ```
- https://github.com/vedruss-sibir/task_2.git
+ git clone https://github.com/vedruss-sibir/task_2.git
 ```
 
 - Установите и активируйте виртуальное окружение
