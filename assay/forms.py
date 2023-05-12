@@ -17,7 +17,7 @@ class AnswerForm(forms.ModelForm):
     answer = forms.ModelChoiceField(
         required=True,
         empty_label=None,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.RadioSelect,
         queryset=None,
     )
 
