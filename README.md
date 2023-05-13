@@ -6,9 +6,9 @@
 
 ### Технологии
 
-Python 3.7
-Django 3.2.16
-HTML
+-Python 3.7
+-Django 3.2.16
+-HTML
 
 ### Запуск проекта в dev-режиме
 
