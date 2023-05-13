@@ -38,14 +38,12 @@ def choice(request, test_id):
     request.session["test"] = test.test_name
     questions = Question.objects.all().filter(test=test)
     global question_index, votes_true
-    print("question_index", question_index)
     question = questions[question_index]
     answers = Answer.objects.all().filter(question=question)
     form = AnswerForm(question=question)
     if request.method == "POST":
         value = request.POST
         answer = value.get("answer")
-        print(answer, "answer")
         if not answer:
             raise forms.ValidationError("Выбирете один вариант ответа")
         answerss = get_object_or_404(Answer, id=answer)
