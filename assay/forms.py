@@ -16,8 +16,6 @@ class CreationForm(UserCreationForm):
 
 class AnswerForm(forms.ModelForm):
     answer = forms.ModelChoiceField(
-        required=True,
-        empty_label=None,
         widget=forms.RadioSelect,
         queryset=None,
     )
